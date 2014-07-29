@@ -1,0 +1,496 @@
+FORMAT: 1A
+HOST: http://api.dribbble.com
+
+# Dribbble API—Unofficial ß
+<img src="http://cl.ly/image/2c0Q3R2q2f41/drbbbl.png" alt="Dribbble" style="float:left; width: 30px; height: 30px; margin-right: 20px;" />The Dribbble API is available for non-commercial use. Commercial use is possible by prior arrangement. Please contact <a href="https://dribbble.com/contact">Dribbble</a> if you wish to apply for commercial use of the API.
+
+
+# Overview
+All API access is over HTTP. All responses are returned as JSON. The API is (mostly) RESTful.
+
+Currently, no API key is required, but this will likely change so we can better monitor usage and enforce the Terms of Use (below). The API has been stable, but will retain the beta moniker until API keys are added.
+
+API calls are limited to 60 per minute and 10,000 per day. We may change the limit in the future and/or tie it to API keys. Exceeding the limit will result in 403 "Rate Limit Exceeded" responses.
+
+# Terms of Use
+
+<img src="http://cl.ly/image/011C0H2w3p0h/terms.png" alt="Dribbble" style="float:left; margin-right: 40px;" /> We're short on lawyers, so our terms are brief. As our values and content are similar to those at <a href="http://flickr.com/">Flickr</a>, we recommend that you read their more extensive <a href="http://www.flickr.com/services/api/tos/">Flickr APIs Terms of Use</a> to get a sense of how the Dribbble API may (and may not) be used. Regarding the branding and design of your application, please read our <a href="https://dribbble.com/branding">Brand Guidelines</a>. With that said, here's our rule book:
+
+- Dribbble members own all rights to their content and it is your responsibility to make sure your use of the API does not contravene those rights.
+- You must remove from your application within 24 hours any Dribbble shot or personal information that the owner asks you to remove.
+- Don't use the name Dribbble in your application, url or branding. Don't use Dribbble artwork in your application except as allowed by the <a href="https://dribbble.com/branding">Brand Guidelines</a>.
+- Do not use the Dribbble API for any application that replicates or attempts to replace the essential user experience of dribbble.com
+- If your application derives revenue from its use of the Dribbble API, directly or indirectly, it is considered a commercial application and requires our approval in advance.
+- Dribbble reserves the right to evaluate and monitor applications to ensure that they do not harm Dribbble's servers or business interests.
+- Do not abuse the API or use it excessively. If you're unsure whether your planned use is excessive, <a href="https://dribbble.com/contact">ask us</a>.
+- Dribbble may terminate your license to the Dribbble API under these terms at any time for any reason.
+- Dribbble reserves the right to update and change these terms from time to time without notice.
+
+
+# Group Shots
+
+<img src="http://cl.ly/image/3N23050N3d00/shots.png" alt="Dribbble" style="float:left;" />
+
+## Shot by :id [/shots/{id}]
+Returns details for a shot specified by ```:id```.
+### GET [GET]
++ Response 200 (application/json)
+
+        {
+        "id": 21603,
+        "title": "Moon",
+        "description": "My response to Mr. Henry's Friday 20 minute \"moon\" design challenge.\n\nFun. Random. Rough. No clue.",
+        "url": "https://dribbble.com/shots/21603-Moon",
+        "short_url": "http://drbl.in/21603",
+        "image_url": "https://dribbble.com/system/users/1/screenshots/21603/shot_1274474082.png",
+        "image_teaser_url": "https://dribbble.com/system/users/1/screenshots/21603/shot_1274474082_teaser.png",
+        "width": 400,
+        "height": 300,
+        "views_count": 1693,
+        "likes_count": 15,
+        "comments_count": 4,
+        "rebounds_count": 0,
+        "rebound_source_id": 21595,
+        "created_at": "2010/05/21 16:34:42 -0400",
+        "player": {
+            "id": 1,
+            "name": "Dan Cederholm",
+            "username": "simplebits",
+            "url": "https://dribbble.com/simplebits",
+            "avatar_url": "https://dribbble.com/system/users/1/avatars/original/dancederholm-peek.jpg",
+            "location": "Salem, MA",
+            "twitter_screen_name": "simplebits",
+            "drafted_by_player_id": null,
+            "shots_count": 147,
+            "draftees_count": 103,
+            "followers_count": 2027,
+            "following_count": 354,
+            "comments_count": 2001,
+            "comments_received_count": 1509,
+            "likes_count": 7289,
+            "likes_received_count": 2624,
+            "rebounds_count": 15,
+            "rebounds_received_count": 279,
+            "created_at": "2009/07/07 21:51:22 -0400"
+            }
+        }
+        
+
+## Shots liked by a player [/players/{id}/shots/likes{?page,per_page}]
+Returns shots liked by the player specified by ```:id```.
+
++ Parameters
+
+    + page (optional) ... Page of results to retrieve.
+    + per_page (optional) ... Number of results retrieved per page. Maximum value allowed is currently 30. Default value returned is 15.
+    
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+        "page": 1,
+        "pages": 50,
+        "per_page": 15,
+        "total": 750,
+        "shots": [
+        {
+            "id": 21603,
+            "title": "Moon",
+            "description": "My response to Mr. Henry's Friday 20 minute \"moon\" design challenge.\n\nFun. Random. Rough. No clue.",
+            "url": "https://dribbble.com/shots/21603-Moon",
+            "short_url": "http://drbl.in/21603",
+            "image_url": "https://dribbble.com/system/users/1/screenshots/21603/shot_1274474082.png",
+            "image_teaser_url": "https://dribbble.com/system/users/1/screenshots/21603/shot_1274474082_teaser.png",
+            "width": 400,
+            "height": 300,
+            "views_count": 1693,
+            "likes_count": 15,
+            "comments_count": 4,
+            "rebounds_count": 0,
+            "rebound_source_id": 21595,
+            "created_at": "2010/05/21 16:34:42 -0400",
+            "player": {
+                "id": 1,
+                "name": "Dan Cederholm",
+                "username": "simplebits",
+                "url": "https://dribbble.com/simplebits",
+                "avatar_url": "https://dribbble.com/system/users/1/avatars/original/dancederholm-peek.jpg",
+                "location": "Salem, MA",
+                "twitter_screen_name": "simplebits",
+                "drafted_by_player_id": null,
+                "shots_count": 147,
+                "draftees_count": 103,
+                "followers_count": 2027,
+                "following_count": 354,
+                "comments_count": 2001,
+                "comments_received_count": 1509,
+                "likes_count": 7289,
+                "likes_received_count": 2624,
+                "rebounds_count": 15,
+                "rebounds_received_count": 279,
+                "created_at": "2009/07/07 21:51:22 -0400"
+            }
+        },
+        ...
+        ]
+        }
+        
+
+## Player's Shots [/players/:id/shots{?page,per_page}]
+Returns the most recent shots for the player specified by ```:id```.
+
++ Parameters
+
+    + page (optional) ... Page of results to retrieve.
+    + per_page (optional) ... Number of results retrieved per page. Maximum value allowed is currently 30. Default value returned is 15.
+    
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+        "page": 1,
+        "pages": 50,
+        "per_page": 15,
+        "total": 750,
+        "shots": [
+        {
+            "id": 21603,
+            "title": "Moon",
+            "description": "My response to Mr. Henry's Friday 20 minute \"moon\" design challenge.\n\nFun. Random. Rough. No clue.",
+            "url": "https://dribbble.com/shots/21603-Moon",
+            "short_url": "http://drbl.in/21603",
+            "image_url": "https://dribbble.com/system/users/1/screenshots/21603/shot_1274474082.png",
+            "image_teaser_url": "https://dribbble.com/system/users/1/screenshots/21603/shot_1274474082_teaser.png",
+            "width": 400,
+            "height": 300,
+            "views_count": 1693,
+            "likes_count": 15,
+            "comments_count": 4,
+            "rebounds_count": 0,
+            "rebound_source_id": 21595,
+            "created_at": "2010/05/21 16:34:42 -0400",
+            "player": {
+                "id": 1,
+                "name": "Dan Cederholm",
+                "username": "simplebits",
+                "url": "https://dribbble.com/simplebits",
+                "avatar_url": "https://dribbble.com/system/users/1/avatars/original/dancederholm-peek.jpg",
+                "location": "Salem, MA",
+                "twitter_screen_name": "simplebits",
+                "drafted_by_player_id": null,
+                "shots_count": 147,
+                "draftees_count": 103,
+                "followers_count": 2027,
+                "following_count": 354,
+                "comments_count": 2001,
+                "comments_received_count": 1509,
+                "likes_count": 7289,
+                "likes_received_count": 2624,
+                "rebounds_count": 15,
+                "rebounds_received_count": 279,
+                "created_at": "2009/07/07 21:51:22 -0400"
+            }
+        },
+        ...
+        ]
+        }
+
+
+## Rebounds [/shots/{id}/rebounds]
+Returns the set of rebounds (shots in response to a shot) for the shot specified by ```:id```.
+### GET [GET]
++ Response 200 (application/json)
+
+        {
+            "page": 1,
+            "pages": 1,
+            "per_page": 15,
+            "total": 2,
+            "shots": [
+                {
+                    "id": 48351,
+                    "title": "Slow and steady wins the race.",
+                    "description": null,
+                    "url": "https://dribbble.com/shots/48351-Slow-and-steady-wins-the-race",
+                    "short_url": "http://drbl.in/48351",
+                    "image_url": "https://dribbble.com/system/users/1/screenshots/48351/shot_1282591933.png",
+                    "image_teaser_url": "https://dribbble.com/system/users/1/screenshots/48351/shot_1282591933_teaser.png",
+                    "width": 400,
+                    "height": 300,
+                    "views_count": 864,
+                    "likes_count": 24,
+                    "comments_count": 13,
+                    "rebounds_count": 0,
+                    "rebound_source_id": 43424,
+                    "created_at": "2010/08/23 15:32:13 -0400",
+                    "player": {
+                        "id": 1,
+                        "name": "Dan Cederholm",
+                        "username": "simplebits",
+                        "url": "https://dribbble.com/simplebits",
+                        "avatar_url": "https://dribbble.com/system/users/1/avatars/original/dancederholm-peek.jpg",
+                        "location": "Salem, MA",
+                        "twitter_screen_name": "simplebits",
+                        "drafted_by_player_id": null,
+                        "shots_count": 147,
+                        "draftees_count": 103,
+                        "followers_count": 2027,
+                        "following_count": 354,
+                        "created_at": "2009/07/07 21:51:22 -0400"
+                        }
+                },
+                ...
+                ]
+        }
+        
+
+## Comments [/shots/{id}/comments]
+Returns the set of comments for the shot specified by ```:id```.
+### GET [GET]
++ Response 200 (application/json)
+
+        {
+         "page": 1,
+         "pages": 1,
+         "per_page": 15,
+         "total": 4,
+         "comments": [
+            {
+            "id": 54065,
+            "body": "My response to Mr. Henry's Friday 20 minute \"moon\" design challenge.\n\nFun. Random. Rough. No clue.",
+            "likes_count": 0,
+            "created_at": "2010/05/21 16:36:22 -0400",
+        "player": {
+            "id": 1,
+            "name": "Dan Cederholm",
+            "username": "simplebits",
+            "url": "https://dribbble.com/simplebits",
+            "avatar_url": "https://dribbble.com/system/users/1/avatars/original/dancederholm-peek.jpg",
+            "location": "Salem, MA",
+            "twitter_screen_name": "simplebits",
+            "drafted_by_player_id": null,
+            "shots_count": 147,
+            "draftees_count": 103,
+            "followers_count": 2027,
+            "following_count": 354,
+            "created_at": "2009/07/07 21:51:22 -0400"
+            }
+        },
+        ...
+        ]
+        }
+        
+## Lists [/shots/{id}/list{?page,per_page}]
+Returns the specified list of shots where ```:list``` has one of the following values: ```debuts```, ```everyone```, ```popular```.
+
++ Parameters
+
+    + page (optional) ... Page of results to retrieve.
+    + per_page (optional) ... Number of results retrieved per page. Maximum value allowed is currently 30. Default value returned is 15.
+    
+### GET [GET]
++ Response 200 (application/json)
+
+        {
+        "page": 1,
+        "pages": 50,
+        "per_page": 15,
+        "total": 750,
+        "shots": [
+        {
+            "id": 21603,
+            "title": "Moon",
+            "description": "My response to Mr. Henry's Friday 20 minute \"moon\" design challenge.\n\nFun. Random. Rough. No clue.",
+            "url": "https://dribbble.com/shots/21603-Moon",
+            "short_url": "http://drbl.in/21603",
+            "image_url": "https://dribbble.com/system/users/1/screenshots/21603/shot_1274474082.png",
+            "image_teaser_url": "https://dribbble.com/system/users/1/screenshots/21603/shot_1274474082_teaser.png",
+            "width": 400,
+            "height": 300,
+            "views_count": 1693,
+            "likes_count": 15,
+            "comments_count": 4,
+            "rebounds_count": 0,
+            "rebound_source_id": 21595,
+            "created_at": "2010/05/21 16:34:42 -0400",
+            "player": {
+                "id": 1,
+                "name": "Dan Cederholm",
+                "username": "simplebits",
+                "url": "https://dribbble.com/simplebits",
+                "avatar_url": "https://dribbble.com/system/users/1/avatars/original/dancederholm-peek.jpg",
+                "location": "Salem, MA",
+                "twitter_screen_name": "simplebits",
+                "drafted_by_player_id": null,
+                "shots_count": 147,
+                "draftees_count": 103,
+                "followers_count": 2027,
+                "following_count": 354,
+                "comments_count": 2001,
+                "comments_received_count": 1509,
+                "likes_count": 7289,
+                "likes_received_count": 2624,
+                "rebounds_count": 15,
+                "rebounds_received_count": 279,
+                "created_at": "2009/07/07 21:51:22 -0400"
+            }
+        },
+        ...
+        ]
+        }
+        
+        
+# Group Players
+
+<img src="http://cl.ly/image/1b2L1O1t001j/player.png" alt="Dribbble" style="float:left; margin-right: 24px;" /> Where a path contains ```/players/:id``` to specify a player, ```:id``` may be a player ```id``` or ```username```, e.g. ```1``` or ```simplebits```.
+
+
+        
+## Following [/players/{id}/following]
+Returns the list of players followed by the player specified by ```:id```.
+    
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+        "page": 1,
+        "pages": 100,
+        "per_page": 15,
+        "total": 1500,
+        "players": [
+        {
+            "id": 2,
+            "name": "Rich Thornett",
+            "username": "frogandcode",
+            "url": "https://dribbble.com/frogandcode",
+            "avatar_url": "https://dribbble.com/system/users/2/avatars/original/headshot.jpg",
+            "location": "Salem, MA",
+            "twitter_screen_name": "frogandcode",
+            "drafted_by_player_id": 1,
+            "shots_count": 10,
+            "draftees_count": 36,
+            "followers_count": 254,
+            "following_count": 309,
+            "comments_count": 331,
+            "comments_received_count": 40,
+            "likes_count": 3041,
+            "likes_received_count": 52,
+            "rebounds_count": 2,
+            "rebounds_received_count": 1,
+            "created_at": "2009/07/07 21:51:50 -0400"
+        },
+        ...
+        ]
+        }
+        
+        
+## Followers [/players/{id}/followers]
+Returns the list of followers for a player specified by ```:id```.
+    
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+        "page": 1,
+        "pages": 100,
+        "per_page": 15,
+        "total": 1500,
+        "players": [
+        {
+            "id": 2,
+            "name": "Rich Thornett",
+            "username": "frogandcode",
+            "url": "https://dribbble.com/frogandcode",
+            "avatar_url": "https://dribbble.com/system/users/2/avatars/original/headshot.jpg",
+            "location": "Salem, MA",
+            "twitter_screen_name": "frogandcode",
+            "drafted_by_player_id": 1,
+            "shots_count": 10,
+            "draftees_count": 36,
+            "followers_count": 254,
+            "following_count": 309,
+            "comments_count": 331,
+            "comments_received_count": 40,
+            "likes_count": 3041,
+            "likes_received_count": 52,
+            "rebounds_count": 2,
+            "rebounds_received_count": 1,
+            "created_at": "2009/07/07 21:51:50 -0400"
+        },
+        ...
+        ]
+        }
+
+        
+## Profile Details [/players/{id}]
+Returns profile details for a player specified by ```:id```.
+    
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+        "id": 1,
+        "name": "Dan Cederholm",
+        "username": "simplebits",
+        "url": "https://dribbble.com/simplebits",
+        "avatar_url": "https://dribbble.com/system/users/1/avatars/original/dancederholm-peek.jpg",
+        "location": "Salem, MA",
+        "twitter_screen_name": "simplebits",
+        "drafted_by_player_id": null,
+        "shots_count": 147,
+        "draftees_count": 103,
+        "followers_count": 2027,
+        "following_count": 354,
+        "comments_count": 2001,
+        "comments_received_count": 1509,
+        "likes_count": 7289,
+        "likes_received_count": 2624,
+        "rebounds_count": 15,
+        "rebounds_received_count": 279,
+        "created_at": "2009/07/07 21:51:22 -0400"
+        }
+        
+
+
+## Draftees [/players/{id}/draftees]
+Returns the list of players drafted by the player specified by ```:id```.
+    
+### GET [GET]
+
++ Response 200 (application/json)
+
+        {
+        "page": 1,
+        "pages": 100,
+        "per_page": 15,
+        "total": 1500,
+        "players": [
+        {
+            "id": 2,
+            "name": "Rich Thornett",
+            "username": "frogandcode",
+            "url": "https://dribbble.com/frogandcode",
+            "avatar_url": "https://dribbble.com/system/users/2/avatars/original/headshot.jpg",
+            "location": "Salem, MA",
+            "twitter_screen_name": "frogandcode",
+            "drafted_by_player_id": 1,
+            "shots_count": 10,
+            "draftees_count": 36,
+            "followers_count": 254,
+            "following_count": 309,
+            "comments_count": 331,
+            "comments_received_count": 40,
+            "likes_count": 3041,
+            "likes_received_count": 52,
+            "rebounds_count": 2,
+            "rebounds_received_count": 1,
+            "created_at": "2009/07/07 21:51:50 -0400"
+        },
+        ...
+        ]
+        }  
